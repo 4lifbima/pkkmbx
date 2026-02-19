@@ -3,10 +3,12 @@
     <div class="mx-auto grid w-full max-w-6xl gap-8 px-4 py-12 md:grid-cols-3 md:px-6">
       <div>
         <router-link to="/" class="text-base font-bold text-slate-900 md:text-lg flex ">
-        <img src="/pkkmb-icon.png" alt="Logo PKKMB IF FT UNG" class="mr-2 inline h-12 w-12" />
+        <img src="/ung.png" alt="Logo PKKMB IF FT UNG" class="mr-2 inline h-8 w-8 lg:h-7 lg:w-7" />
+        <img src="/dikti.png" alt="Logo PKKMB IF FT UNG" class="mr-2 inline h-8 w-8 lg:h-7 lg:w-7" />
+        <img src="/pkkmb-icon.png" alt="Logo PKKMB IF FT UNG" class="mr-2 inline h-8 w-8 lg:h-7 lg:w-7" />
         <div class="flex flex-col leading-tight">
-          <h3 class="font-extrabold text-xl text-primary">PKKMB FTUNG 2026</h3>
-          <p class="text-sm">Universitas Negeri Gorontalo</p>
+          <h3 class="font-extrabold text-md lg:text-[16px] text-primary">PKKMB JTIFUNG 2026</h3>
+          <p class="text-xs">Universitas Negeri Gorontalo</p>
         </div>
       </router-link>
         <p class="mt-3 text-sm text-slate-600">

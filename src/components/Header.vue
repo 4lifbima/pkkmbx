@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
 import { ref } from 'vue'
+import { useAuthStore } from '../stores/auth'
+import { useRouter } from 'vue-router'
 
 const isMenuOpen = ref(false)
+const auth = useAuthStore()
+const router = useRouter()
 
 const navItems = [
   { name: 'Beranda', to: '/' },
@@ -10,6 +14,12 @@ const navItems = [
   { name: 'Tentang', to: '/tentang' },
   { name: 'Kontak', to: '/kontak' },
 ]
+
+const logout = async () => {
+  auth.clearAuth()
+  isMenuOpen.value = false
+  await router.push('/login')
+}
 </script>
 
 <template>
@@ -20,7 +30,7 @@ const navItems = [
         <img src="/dikti.png" alt="Logo PKKMB IF FT UNG" class="mr-2 inline h-8 w-8 lg:h-12 lg:w-12" />
         <img src="/pkkmb-icon.png" alt="Logo PKKMB IF FT UNG" class="mr-2 inline h-8 w-8 lg:h-12 lg:w-12" />
         <div class="flex flex-col leading-tight">
-          <h3 class="font-extrabold lg:text-xl text-primary">PKKMB FTUNG 2026</h3>
+          <h3 class="font-extrabold lg:text-md text-primary">PKKMB JTIFUNG 2026</h3>
           <p class="lg:text-sm text-xs">Universitas Negeri Gorontalo</p>
         </div>
       </router-link>
@@ -43,12 +53,35 @@ const navItems = [
         >
           {{ item.name }}
         </router-link>
-        <button
-          type="button"
-          class="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white shadow-soft transition hover:bg-primary-dark"
-        >
-          Login Panitia
-        </button>
+        <template v-if="auth.state.user">
+          <router-link
+            :to="auth.state.user.role === 'admin' ? '/dashboard-admin' : '/dashboard-mahasiswa'"
+            class="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white shadow-soft transition hover:bg-primary-dark"
+          >
+            Dashboard
+          </router-link>
+          <button
+            type="button"
+            class="rounded-lg border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-red-300 hover:text-red-500"
+            @click="logout"
+          >
+            Logout
+          </button>
+        </template>
+        <template v-else>
+          <router-link
+            to="/login"
+            class="rounded-lg border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary"
+          >
+            Login
+          </router-link>
+          <router-link
+            to="/register"
+            class="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white shadow-soft transition hover:bg-primary-dark"
+          >
+            Daftar
+          </router-link>
+        </template>
       </nav>
     </div>
 
@@ -64,12 +97,38 @@ const navItems = [
           >
             {{ item.name }}
           </router-link>
-          <button
-            type="button"
-            class="mt-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white shadow-soft transition hover:bg-primary-dark"
-          >
-            Login Panitia
-          </button>
+          <template v-if="auth.state.user">
+            <router-link
+              :to="auth.state.user.role === 'admin' ? '/dashboard-admin' : '/dashboard-mahasiswa'"
+              class="mt-2 rounded-lg bg-primary px-4 py-2 text-center text-sm font-semibold text-white shadow-soft transition hover:bg-primary-dark"
+              @click="isMenuOpen = false"
+            >
+              Dashboard
+            </router-link>
+            <button
+              type="button"
+              class="rounded-lg border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-red-300 hover:text-red-500"
+              @click="logout"
+            >
+              Logout
+            </button>
+          </template>
+          <template v-else>
+            <router-link
+              to="/login"
+              class="mt-2 rounded-lg border border-slate-300 px-4 py-2 text-center text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary"
+              @click="isMenuOpen = false"
+            >
+              Login
+            </router-link>
+            <router-link
+              to="/register"
+              class="rounded-lg bg-primary px-4 py-2 text-center text-sm font-semibold text-white shadow-soft transition hover:bg-primary-dark"
+              @click="isMenuOpen = false"
+            >
+              Daftar
+            </router-link>
+          </template>
         </div>
       </nav>
     </transition>

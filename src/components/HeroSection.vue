@@ -16,10 +16,13 @@ import { Icon } from '@iconify/vue'
           Membangun Generasi Digital yang Kreatif dan Inovatif melalui pengalaman kampus yang inspiratif.
         </p>
         <div class="mt-8 flex flex-cols gap-3">
-          <button class="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-white shadow-soft transition hover:bg-primary-dark">
+          <router-link
+            to="/register"
+            class="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-white shadow-soft transition hover:bg-primary-dark"
+          >
             <Icon icon="heroicons:user-plus-20-solid" />
            <p class="text-xs lg:text-sm">Daftar Sekarang</p> 
-          </button>
+          </router-link>
           <router-link
             to="/agenda"
             class="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary"
