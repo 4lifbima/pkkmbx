@@ -142,8 +142,8 @@ const logout = async () => {
           @click.self="showLogoutModal = false"
         >
           <div class="w-full max-w-sm rounded-2xl bg-white p-6 shadow-xl">
-            <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-amber-100">
-              <Icon icon="heroicons:arrow-right-on-rectangle-20-solid" class="text-2xl text-amber-600" />
+            <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-red-100">
+              <Icon icon="heroicons:arrow-right-on-rectangle-20-solid" class="text-2xl text-red-600" />
             </div>
             <h3 class="text-center text-lg font-bold text-slate-900">Konfirmasi Logout</h3>
             <p class="mt-2 text-center text-sm text-slate-500">
