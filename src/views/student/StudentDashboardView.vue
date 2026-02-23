@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, reactive, ref } from 'vue'
 import DashboardShell from '../../components/dashboard/DashboardShell.vue'
-import { apiRequest, apiUpload } from '../../lib/api'
+import { apiRequest, apiUpload, resolveApiAssetUrl } from '../../lib/api'
 import { useAuthStore } from '../../stores/auth'
 import type { StudentProfile } from '../../types/auth'
 import { Icon } from '@iconify/vue'
@@ -50,13 +50,7 @@ const form = reactive<StudentProfile>({
   ktmUrl: '',
 })
 
-const resolveFileUrl = (relativePath: string | null) => {
-  if (!relativePath) return null
-  if (relativePath.startsWith('http://') || relativePath.startsWith('https://')) return relativePath
-  const apiBase =
-    import.meta.env.VITE_API_BASE_URL ?? `${window.location.protocol}//${window.location.hostname}:8000`
-  return `${apiBase}${relativePath}`
-}
+const resolveFileUrl = (relativePath: string | null) => resolveApiAssetUrl(relativePath)
 
 const profileCompletion = computed(() => {
   const fields = [form.fullName, form.nim, form.phone, form.address, form.birthPlace, form.birthDate, form.prodi]

@@ -2,7 +2,7 @@
 import { computed, onMounted, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import DashboardShell from '../../components/dashboard/DashboardShell.vue'
-import { apiRequest } from '../../lib/api'
+import { apiRequest, resolveApiAssetUrl } from '../../lib/api'
 import { useAuthStore } from '../../stores/auth'
 import { Icon } from '@iconify/vue'
 
@@ -53,12 +53,7 @@ const documents = reactive({
   ktmUrl: null as string | null,
 })
 
-const resolveFileUrl = (relativePath: string | null) => {
-  if (!relativePath) return null
-  if (relativePath.startsWith('http://') || relativePath.startsWith('https://')) return relativePath
-  const apiBase = import.meta.env.VITE_API_BASE_URL ?? `${window.location.protocol}//${window.location.hostname}:8000`
-  return `${apiBase}${relativePath}`
-}
+const resolveFileUrl = (relativePath: string | null) => resolveApiAssetUrl(relativePath)
 
 const onJurusanChange = () => {
   selectedProdiId.value = ''

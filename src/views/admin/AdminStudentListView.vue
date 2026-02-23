@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 import DashboardShell from '../../components/dashboard/DashboardShell.vue'
-import { apiRequest } from '../../lib/api'
+import { apiRequest, resolveApiAssetUrl } from '../../lib/api'
 import { useAuthStore } from '../../stores/auth'
 import { Icon } from '@iconify/vue'
 
@@ -52,13 +52,7 @@ const filteredStudents = computed(() => {
   )
 })
 
-const resolveFileUrl = (relativePath: string | null) => {
-  if (!relativePath) return undefined
-  if (relativePath.startsWith('http://') || relativePath.startsWith('https://')) return relativePath
-  const apiBase =
-    import.meta.env.VITE_API_BASE_URL ?? `${window.location.protocol}//${window.location.hostname}:8000`
-  return `${apiBase}${relativePath}`
-}
+const resolveFileUrl = (relativePath: string | null) => resolveApiAssetUrl(relativePath) ?? undefined
 
 const loadStudents = async () => {
   loading.value = true

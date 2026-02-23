@@ -1,6 +1,5 @@
-const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL ??
-  `${window.location.protocol}//${window.location.hostname}:8000`
+const rawApiBaseUrl = import.meta.env.VITE_API_BASE_URL?.trim() || 'https://kms.jtifung.com'
+export const API_BASE_URL = rawApiBaseUrl.replace(/\/+$/, '')
 
 interface RequestOptions {
   method?: 'GET' | 'POST' | 'PUT' | 'DELETE'
@@ -42,4 +41,10 @@ export async function apiUpload<T>(path: string, file: File, fieldName: string, 
     throw new Error(data.message ?? 'Upload gagal.')
   }
   return data as T
+}
+
+export function resolveApiAssetUrl(relativePath: string | null): string | null {
+  if (!relativePath) return null
+  if (relativePath.startsWith('http://') || relativePath.startsWith('https://')) return relativePath
+  return `${API_BASE_URL}${relativePath}`
 }
