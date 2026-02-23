@@ -6,6 +6,11 @@ import ContactView from '../views/ContactView.vue'
 import LoginView from '../views/LoginView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import AdminDashboardView from '../views/admin/AdminDashboardView.vue'
+import AdminStudentListView from '../views/admin/AdminStudentListView.vue'
+import AdminStudentCreateView from '../views/admin/AdminStudentCreateView.vue'
+import AdminStudentEditView from '../views/admin/AdminStudentEditView.vue'
+import AdminStudentDetailView from '../views/admin/AdminStudentDetailView.vue'
+import AdminJurusanView from '../views/admin/AdminJurusanView.vue'
 import StudentDashboardView from '../views/student/StudentDashboardView.vue'
 import { useAuthStore } from '../stores/auth'
 
@@ -22,6 +27,36 @@ const router = createRouter({
       path: '/dashboard-admin',
       name: 'admin-dashboard',
       component: AdminDashboardView,
+      meta: { requiresAuth: true, role: 'admin' },
+    },
+    {
+      path: '/dashboard-admin/mahasiswa',
+      name: 'admin-student-list',
+      component: AdminStudentListView,
+      meta: { requiresAuth: true, role: 'admin' },
+    },
+    {
+      path: '/dashboard-admin/mahasiswa/create',
+      name: 'admin-student-create',
+      component: AdminStudentCreateView,
+      meta: { requiresAuth: true, role: 'admin' },
+    },
+    {
+      path: '/dashboard-admin/mahasiswa/:id',
+      name: 'admin-student-detail',
+      component: AdminStudentDetailView,
+      meta: { requiresAuth: true, role: 'admin' },
+    },
+    {
+      path: '/dashboard-admin/mahasiswa/:id/edit',
+      name: 'admin-student-edit',
+      component: AdminStudentEditView,
+      meta: { requiresAuth: true, role: 'admin' },
+    },
+    {
+      path: '/dashboard-admin/jurusan',
+      name: 'admin-jurusan',
+      component: AdminJurusanView,
       meta: { requiresAuth: true, role: 'admin' },
     },
     {
