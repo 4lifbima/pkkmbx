@@ -1,4 +1,4 @@
-const rawApiBaseUrl = import.meta.env.VITE_API_BASE_URL?.trim() || 'https://pkkmbung.kesug.com/public'
+const rawApiBaseUrl = import.meta.env.VITE_API_BASE_URL?.trim() || 'https://kms.jtifung.com/'
 export const API_BASE_URL = rawApiBaseUrl.replace(/\/+$/, '')
 
 interface RequestOptions {
