@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import Footer from '../components/Footer.vue'
-import Header from '../components/Header.vue'
 import { ref } from 'vue'
 import { useAuthStore } from '../stores/auth'
 import { useRouter } from 'vue-router'
+import { Icon } from '@iconify/vue'
 
 const auth = useAuthStore()
 const router = useRouter()
@@ -29,56 +28,84 @@ const submitRegister = async () => {
 </script>
 
 <template>
-  <Header />
-  <main class="mx-auto w-full max-w-6xl px-4 py-8 md:px-6 md:py-10">
-    <section class="mx-auto max-w-lg rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
-      <h1 class="text-2xl font-bold text-slate-900">Pendaftaran Mahasiswa</h1>
-      <p class="mt-2 text-sm text-slate-600">Buat akun untuk mengelola biodata PKKMB.</p>
+  <main class="flex min-h-screen items-center justify-center bg-[#f3f5fb] px-4 py-8">
+    <section class="w-full max-w-md rounded-3xl border border-slate-200/60 bg-white p-8 shadow-xl shadow-slate-200/50">
+      <div class="mb-8 text-center">
+        <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10">
+          <img src="/ung.png" alt="Logo" class="h-12 w-12" />
+        </div>
+        <h1 class="mt-4 text-2xl font-extrabold text-slate-900">Buat Akun Baru 🚀</h1>
+        <p class="mt-2 text-sm text-slate-500">Daftarkan diri Anda untuk PKKMB.</p>
+      </div>
 
-      <form class="mt-6 space-y-4" @submit.prevent="submitRegister">
+      <form class="space-y-5" @submit.prevent="submitRegister">
         <div>
-          <label class="mb-1 block text-sm font-medium text-slate-700">Nama Lengkap</label>
-          <input
-            v-model="fullName"
-            type="text"
-            required
-            class="w-full rounded-xl border border-slate-300 px-4 py-2.5 text-sm outline-none ring-primary/20 transition focus:border-primary focus:ring"
-          />
+          <label class="mb-1.5 block text-sm font-semibold text-slate-700">Nama Lengkap</label>
+          <div class="relative">
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400">
+              <Icon icon="heroicons:user-20-solid" class="text-lg" />
+            </div>
+            <input
+              v-model="fullName"
+              type="text"
+              required
+              placeholder="Masukkan nama lengkap Anda"
+              class="w-full rounded-xl border border-slate-300 bg-slate-50 py-3 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20"
+            />
+          </div>
         </div>
         <div>
-          <label class="mb-1 block text-sm font-medium text-slate-700">Email</label>
-          <input
-            v-model="email"
-            type="email"
-            required
-            class="w-full rounded-xl border border-slate-300 px-4 py-2.5 text-sm outline-none ring-primary/20 transition focus:border-primary focus:ring"
-          />
+          <label class="mb-1.5 block text-sm font-semibold text-slate-700">Email</label>
+          <div class="relative">
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400">
+              <Icon icon="heroicons:envelope-20-solid" class="text-lg" />
+            </div>
+            <input
+              v-model="email"
+              type="email"
+              required
+              placeholder="Masukkan alamat email aktif"
+              class="w-full rounded-xl border border-slate-300 bg-slate-50 py-3 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20"
+            />
+          </div>
         </div>
         <div>
-          <label class="mb-1 block text-sm font-medium text-slate-700">Password</label>
-          <input
-            v-model="password"
-            type="password"
-            required
-            minlength="6"
-            class="w-full rounded-xl border border-slate-300 px-4 py-2.5 text-sm outline-none ring-primary/20 transition focus:border-primary focus:ring"
-          />
+          <label class="mb-1.5 block text-sm font-semibold text-slate-700">Password</label>
+          <div class="relative">
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400">
+              <Icon icon="heroicons:lock-closed-20-solid" class="text-lg" />
+            </div>
+            <input
+              v-model="password"
+              type="password"
+              required
+              minlength="6"
+              placeholder="Buat sandi yang kuat (min. 6 karakter)"
+              class="w-full rounded-xl border border-slate-300 bg-slate-50 py-3 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20"
+            />
+          </div>
         </div>
-        <p v-if="errorMessage" class="text-sm font-medium text-red-500">{{ errorMessage }}</p>
+        
+        <p v-if="errorMessage" class="flex items-center gap-2 rounded-lg bg-red-50 p-3 text-sm font-medium text-red-600">
+          <Icon icon="heroicons:exclamation-circle-20-solid" class="text-lg" />
+          {{ errorMessage }}
+        </p>
+
         <button
           type="submit"
           :disabled="isSubmitting"
-          class="w-full rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-white transition hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-60"
+          class="mt-2 w-full rounded-xl bg-primary px-4 py-3.5 text-sm font-bold text-white shadow-md shadow-primary/25 transition hover:bg-primary-dark hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-60"
         >
           {{ isSubmitting ? 'Memproses...' : 'Daftar Sekarang' }}
         </button>
       </form>
 
-      <p class="mt-4 text-sm text-slate-600">
-        Sudah punya akun?
-        <router-link to="/login" class="font-semibold text-primary">Login di sini</router-link>
-      </p>
+      <div class="mt-8 text-center text-sm text-slate-500">
+        Sudah memiliki akun?
+        <router-link to="/login" class="font-bold text-primary transition hover:text-primary-dark hover:underline">
+          Masuk di sini
+        </router-link>
+      </div>
     </section>
   </main>
-  <Footer />
 </template>
