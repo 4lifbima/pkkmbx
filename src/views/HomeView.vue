@@ -17,9 +17,9 @@ const insights: InsightItem[] = [
 
 const features: FeatureItem[] = [
   {
-    title: 'Informasi Lengkap',
-    description: 'Semua informasi PKKMB dapat diakses dalam satu platform yang jelas dan terstruktur.',
-    icon: 'heroicons:information-circle-20-solid',
+    title: 'Prestasi Terkini',
+    description: 'Lihat pencapaian terbaru dari mahasiswa baru yang telah mengikuti PKKMB.',
+    icon: 'solar:cup-star-bold',
   },
   {
     title: 'Jadwal Terpadu',
@@ -28,7 +28,7 @@ const features: FeatureItem[] = [
   },
   {
     title: 'Pengumuman Real-time',
-    description: 'Dapatkan update terbaru dari panitia secara langsung melalui halaman utama.',
+    description: 'Dapatkan update berita terbaru dari panitia secara langsung melalui halaman utama.',
     icon: 'heroicons:megaphone-20-solid',
   },
 ]

@@ -12,6 +12,8 @@ import AdminStudentEditView from '../views/admin/AdminStudentEditView.vue'
 import AdminStudentDetailView from '../views/admin/AdminStudentDetailView.vue'
 import AdminJurusanView from '../views/admin/AdminJurusanView.vue'
 import StudentDashboardView from '../views/student/StudentDashboardView.vue'
+import StudentProfileView from '../views/student/StudentProfileView.vue'
+import StudentProfileEditView from '../views/student/StudentProfileEditView.vue'
 import { useAuthStore } from '../stores/auth'
 
 const router = createRouter({
@@ -65,6 +67,18 @@ const router = createRouter({
       component: StudentDashboardView,
       meta: { requiresAuth: true, role: 'student' },
     },
+    {
+      path: '/dashboard-mahasiswa/profil',
+      name: 'student-profile',
+      component: StudentProfileView,
+      meta: { requiresAuth: true, role: 'student' },
+    },
+    {
+      path: '/dashboard-mahasiswa/profil/edit',
+      name: 'student-profile-edit',
+      component: StudentProfileEditView,
+      meta: { requiresAuth: true, role: 'student' },
+    },
   ],
 })
 
@@ -91,3 +105,4 @@ router.beforeEach((to) => {
 })
 
 export default router
+
